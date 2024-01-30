@@ -18,7 +18,6 @@ spec:
       port: 3306
       targetPort: 3306
 
-
 ---
 apiVersion: v1
 kind: Service
@@ -49,20 +48,20 @@ spec: # specification for deployment resource
         app: mariadb # service will look for this label
     spec: # specification for Pods
       containers:
-      - name: mariadb
-        image: mariadb
-        ports:
-        - containerPort: 3306 
-        env:
-        - name: MARIADB_ROOT_PASSWORD
-          value: greencodr 
-      - name: phpmyadmin
-        image: bitnami/phpmyadmin:latest
-        ports:
-        - containerPort: 8080
-        env:
-        - name: DATABASE_HOST
-          valueFrom:
-            configMapKeyRef:
-              name: mariadb-configmap
-              key: database_url
+        - name: mariadb
+          image: mariadb
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MARIADB_ROOT_PASSWORD
+              value: greencodr
+        - name: phpmyadmin
+          image: bitnami/phpmyadmin:latest
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: mariadb-configmap
+                  key: database_url
