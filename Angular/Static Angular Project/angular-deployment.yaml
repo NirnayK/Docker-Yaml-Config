@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: angular-spa-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: angular
+  template:
+    metadata:
+      labels:
+        app: angular
+    spec:
+      containers:
+        - name: angular-spa
+          image: angular:1.1
+          ports:
+            - containerPort: 80
